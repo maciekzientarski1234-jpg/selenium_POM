@@ -5,8 +5,10 @@ import random
 class RegistrationDataGenerator:
     def __init__(self):
         self.GENDER= random.choice([Gender.MALE, Gender.FEMALE])
-        self.fake = Faker("pl_PL")
+        self.__fake = Faker("pl_PL")
         if self.GENDER == Gender.FEMALE:
-            self.FIRST_NAME = self.fake.first_name_female()
+            self.FIRST_NAME = self.__fake.first_name_female()
         else:
-            self.FIRST_NAME = self.fake.first_name_male()
+            self.FIRST_NAME = self.__fake.first_name_male()
+        self.EMAIL = self.__fake.email()
+        self.PASSWORD = self.__fake.password()
