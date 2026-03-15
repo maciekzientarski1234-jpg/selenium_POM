@@ -21,6 +21,7 @@ class Locators:
     BIRTH_MONTH_SELECT = (By.ID, 'months')
     BIRTH_YEAR_SELECT = (By.ID, 'years')
     VISIBLE_ERRORS = (By.XPATH, '//div[@class="alert alert-danger"]/ol/li')
+    NUMBER_VISIBLE_ERRORS = (By.XPATH, '//div[@class="alert alert-danger"]/p')
 
 
 class CreateAccountPage(BasePage):
@@ -70,6 +71,12 @@ class CreateAccountPage(BasePage):
         Get Email entered on previous page
         """
         return self.driver.find_element(*Locators.EMAIL).get_attribute("value")
+
+    def get_number_of_errors_message(self):
+        """
+        Get Number of Errors message
+        """
+        return self.driver.find_element(*Locators.NUMBER_VISIBLE_ERRORS).text
 
     def get_visible_errors(self):
         """
