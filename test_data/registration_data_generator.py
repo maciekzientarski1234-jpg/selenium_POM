@@ -12,3 +12,4 @@ class RegistrationDataGenerator:
             self.FIRST_NAME = self.__fake.first_name_male()
         self.EMAIL = self.__fake.email()
         self.PASSWORD = self.__fake.password()
+        self.DATE_OF_BIRTH = self.__fake.date_of_birth()
