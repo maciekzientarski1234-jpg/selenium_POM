@@ -20,6 +20,7 @@ class Locators:
     BIRTH_DAY_SELECT = (By.ID, 'days')
     BIRTH_MONTH_SELECT = (By.ID, 'months')
     BIRTH_YEAR_SELECT = (By.ID, 'years')
+    VISIBLE_ERRORS = (By.XPATH, '//div[@class="alert alert-danger"]/ol/li')
 
 
 class CreateAccountPage(BasePage):
@@ -53,12 +54,22 @@ class CreateAccountPage(BasePage):
         """
         birth_day = Select(self.driver.find_element(*Locators.BIRTH_DAY_SELECT))
         birth_day.select_by_value(str(date_of_birth.day))
+        birth_month = Select(self.driver.find_element(*Locators.BIRTH_MONTH_SELECT))
+        birth_month.select_by_value(str(date_of_birth.month))
+        birth_year = Select(self.driver.find_element(*Locators.BIRTH_YEAR_SELECT))
+        birth_year.select_by_value(str(date_of_birth.year))
 
     def get_entered_email(self):
         """
         Get Email entered on previous page
         """
         return self.driver.find_element(*Locators.EMAIL).get_attribute("value")
+
+    def get_visible_errors(self):
+        """
+        Return all visible errors
+        """
+        self.driver.find_elements(*Locators.VISIBLE_ERRORS)
 
 
     def _verify_page(self):
