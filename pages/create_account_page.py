@@ -59,6 +59,12 @@ class CreateAccountPage(BasePage):
         birth_year = Select(self.driver.find_element(*Locators.BIRTH_YEAR_SELECT))
         birth_year.select_by_value(str(date_of_birth.year))
 
+    def click_register_button(self):
+        """
+        Clicks Register Button
+        """
+        self.driver.find_element(*Locators.REGISTER_BTN).click()
+
     def get_entered_email(self):
         """
         Get Email entered on previous page
@@ -69,7 +75,11 @@ class CreateAccountPage(BasePage):
         """
         Return all visible errors
         """
-        self.driver.find_elements(*Locators.VISIBLE_ERRORS)
+        errors_webelements = self.driver.find_elements(*Locators.VISIBLE_ERRORS)
+        visible_errors = []
+        for error in errors_webelements:
+            visible_errors.append(error.text)
+        return visible_errors
 
 
     def _verify_page(self):
